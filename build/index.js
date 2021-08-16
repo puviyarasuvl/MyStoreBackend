@@ -6,6 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var index_1 = __importDefault(require("./routes/index"));
 var cors_1 = __importDefault(require("cors"));
+var dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_AUDIENCE) {
+    throw 'Make sure you have AUTH0_DOMAIN, and AUTH0_AUDIENCE in your .env file';
+}
 var app = express_1.default();
 var port = 3000;
 // Enable cors for all origins and routes

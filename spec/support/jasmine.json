@@ -1,6 +1,14 @@
 {
     "spec_dir": "build/tests",
-    "spec_files": ["routes/indexSpec.js"],
+    "spec_files": [
+        "models/productSpec.js",
+        "models/orderSpec.js",
+        "routes/indexSpec.js",
+        "routes/api/productsSpec.js",
+        "routes/api/ordersSpec.js",
+        "services/customerDashboardSpec.js",
+        "routes/api/customerDashboardSpec.js"
+    ],
     "helpers": ["helpers/**/*.js"],
     "reporters": [
         {

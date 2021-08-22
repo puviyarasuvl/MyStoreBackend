@@ -10,7 +10,7 @@ describe('Testing dashboard route', () => {
     it('[get] /api/dashboard/cart should return the current order details', async () => {
         const res = await axios({
             method: 'POST',
-            url: 'https://dev-nmnw9s-h.us.auth0.com/oauth/token',
+            url: 'https://my-store-app.us.auth0.com/oauth/token',
             headers: { 'content-type': 'application/json' },
             data: {
                 grant_type: 'client_credentials',
@@ -64,8 +64,6 @@ describe('Testing dashboard route', () => {
             .send({ userId: 'testUser2' })
             .set('Authorization', `Bearer ${customerAuthToken}`)
             .expect(200);
-
-        console.log(customerAuthToken);
 
         expect(response.body.userId).toEqual('testUser2');
         expect(response.body.orders.length).toEqual(2);

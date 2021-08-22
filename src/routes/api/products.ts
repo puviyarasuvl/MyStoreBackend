@@ -1,6 +1,6 @@
 import express from 'express';
 import { Product, ProductModel } from '../../models/product';
-import { checkJwt, checkScopes } from '../../services/authenticator';
+import { checkJwt, checkPermissions } from '../../services/authenticator';
 
 const productRouter = express.Router();
 
@@ -14,8 +14,6 @@ const create = async (req: express.Request, res: express.Response) => {
         description: req.body.description,
         url: req.body.url,
     };
-
-    console.log(req.body);
 
     try {
         const result = await productModel.create(newProduct);
@@ -74,11 +72,14 @@ const productsByCategory = async (
     }
 };
 
-productRouter.post('/', checkJwt, checkScopes, (req, res) => {
-    console.log('inside post /api/products');
-
-    create(req, res);
-});
+productRouter.post(
+    '/',
+    checkJwt,
+    checkPermissions('add:product'),
+    (req, res) => {
+        create(req, res);
+    }
+);
 
 productRouter.get('/', (req, res) => {
     index(req, res);
@@ -88,9 +89,14 @@ productRouter.get('/:productId', (req, res) => {
     show(req, res);
 });
 
-productRouter.delete('/', checkJwt, checkScopes, (req, res) => {
-    deleteProduct(req, res);
-});
+productRouter.delete(
+    '/',
+    checkJwt,
+    checkPermissions('delete:product'),
+    (req, res) => {
+        deleteProduct(req, res);
+    }
+);
 
 productRouter.get('/category/:category', (req, res) => {
     productsByCategory(req, res);

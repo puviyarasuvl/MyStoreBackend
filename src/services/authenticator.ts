@@ -17,6 +17,12 @@ const checkJwt = jwt({
     algorithms: ['RS256'],
 });
 
-const checkScopes = jwtAuthz(['add:products']);
+const checkPermissions = (permissions: string) => {
+    return jwtAuthz([permissions], {
+        customScopeKey: 'permissions',
+        checkAllScopes: true,
+        failWithError: true,
+    });
+};
 
-export { checkJwt, checkScopes };
+export { checkJwt, checkPermissions };

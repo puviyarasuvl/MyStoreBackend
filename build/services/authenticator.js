@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkScopes = exports.checkJwt = void 0;
+exports.checkPermissions = exports.checkJwt = void 0;
 var express_jwt_1 = __importDefault(require("express-jwt"));
 var express_jwt_authz_1 = __importDefault(require("express-jwt-authz"));
 var jwks_rsa_1 = __importDefault(require("jwks-rsa"));
@@ -21,5 +21,11 @@ var checkJwt = express_jwt_1.default({
     algorithms: ['RS256'],
 });
 exports.checkJwt = checkJwt;
-var checkScopes = express_jwt_authz_1.default(['add:products']);
-exports.checkScopes = checkScopes;
+var checkPermissions = function (permissions) {
+    return express_jwt_authz_1.default([permissions], {
+        customScopeKey: 'permissions',
+        checkAllScopes: true,
+        failWithError: true,
+    });
+};
+exports.checkPermissions = checkPermissions;

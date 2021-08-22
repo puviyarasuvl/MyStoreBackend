@@ -74,7 +74,7 @@ describe('Testing products route', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, axios_1.default({
                         method: 'POST',
-                        url: 'https://dev-nmnw9s-h.us.auth0.com/oauth/token',
+                        url: 'https://my-store-app.us.auth0.com/oauth/token',
                         headers: { 'content-type': 'application/json' },
                         data: {
                             grant_type: 'client_credentials',
@@ -86,6 +86,7 @@ describe('Testing products route', function () {
                 case 1:
                     res = _a.sent();
                     adminAuthToken = res.data.access_token;
+                    console.log(adminAuthToken);
                     return [4 /*yield*/, request
                             .post('/api/products')
                             .type('form')
@@ -111,7 +112,7 @@ describe('Testing products route', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, axios_1.default({
                         method: 'POST',
-                        url: 'https://dev-nmnw9s-h.us.auth0.com/oauth/token',
+                        url: 'https://my-store-app.us.auth0.com/oauth/token',
                         headers: { 'content-type': 'application/json' },
                         data: {
                             grant_type: 'client_credentials',

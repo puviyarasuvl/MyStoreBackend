@@ -51,7 +51,7 @@ describe('Testing orders route', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, axios_1.default({
                         method: 'POST',
-                        url: 'https://dev-nmnw9s-h.us.auth0.com/oauth/token',
+                        url: 'https://my-store-app.us.auth0.com/oauth/token',
                         headers: { 'content-type': 'application/json' },
                         data: {
                             grant_type: 'client_credentials',

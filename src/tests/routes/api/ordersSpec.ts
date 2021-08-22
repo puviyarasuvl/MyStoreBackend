@@ -10,7 +10,7 @@ describe('Testing orders route', () => {
     it('[get] /api/orders should return all the orders information', async () => {
         const res = await axios({
             method: 'POST',
-            url: 'https://dev-nmnw9s-h.us.auth0.com/oauth/token',
+            url: 'https://my-store-app.us.auth0.com/oauth/token',
             headers: { 'content-type': 'application/json' },
             data: {
                 grant_type: 'client_credentials',

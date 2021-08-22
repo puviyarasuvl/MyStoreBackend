@@ -26,7 +26,7 @@ describe('Testing products route', () => {
     it('[post] /api/products should allow admin to add new products', async () => {
         const res = await axios({
             method: 'POST',
-            url: 'https://dev-nmnw9s-h.us.auth0.com/oauth/token',
+            url: 'https://my-store-app.us.auth0.com/oauth/token',
             headers: { 'content-type': 'application/json' },
             data: {
                 grant_type: 'client_credentials',
@@ -57,7 +57,7 @@ describe('Testing products route', () => {
     it('[post] /api/products should not allow customer to add new products', async () => {
         const res = await axios({
             method: 'POST',
-            url: 'https://dev-nmnw9s-h.us.auth0.com/oauth/token',
+            url: 'https://my-store-app.us.auth0.com/oauth/token',
             headers: { 'content-type': 'application/json' },
             data: {
                 grant_type: 'client_credentials',

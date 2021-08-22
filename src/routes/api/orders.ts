@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { OrderModel } from '../../models/order';
-import { checkJwt, checkScopes } from '../../services/authenticator';
+import { checkJwt } from '../../services/authenticator';
 
 const orderRouter = express.Router();
 

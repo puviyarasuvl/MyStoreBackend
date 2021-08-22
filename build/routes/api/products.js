@@ -156,7 +156,7 @@ var productsByCategory = function (req, res) { return __awaiter(void 0, void 0, 
         }
     });
 }); };
-productRouter.post('/', authenticator_1.checkJwt, authenticator_1.checkScopes, function (req, res) {
+productRouter.post('/', authenticator_1.checkJwt, authenticator_1.checkPermissions('add:product'), function (req, res) {
     console.log('inside post /api/products');
     create(req, res);
 });
@@ -166,7 +166,7 @@ productRouter.get('/', function (req, res) {
 productRouter.get('/:productId', function (req, res) {
     show(req, res);
 });
-productRouter.delete('/', authenticator_1.checkJwt, authenticator_1.checkScopes, function (req, res) {
+productRouter.delete('/', authenticator_1.checkJwt, authenticator_1.checkPermissions('delete:product'), function (req, res) {
     deleteProduct(req, res);
 });
 productRouter.get('/category/:category', function (req, res) {

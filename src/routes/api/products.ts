@@ -81,11 +81,13 @@ productRouter.post(
     }
 );
 
-productRouter.get('/', (req, res) => {
+productRouter.get('/getProduct', (req, res) => {
+    console.log(req.rawHeaders);
+
     index(req, res);
 });
 
-productRouter.get('/:productId', (req, res) => {
+productRouter.get('/getProduct/:productId', (req, res) => {
     show(req, res);
 });
 

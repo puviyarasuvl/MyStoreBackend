@@ -84,7 +84,7 @@ describe('Testing products route', () => {
     });
 
     it('[get] /api/products should return all available products information', async () => {
-        const response = await request.get('/api/products');
+        const response = await request.get('/api/products/getProduct');
         expect(response.status).toEqual(200);
 
         expect(response.body).toEqual([
@@ -116,7 +116,7 @@ describe('Testing products route', () => {
     });
 
     it('[get] /api/products/4 should return product information for given id', async () => {
-        const response = await request.get('/api/products/4');
+        const response = await request.get('/api/products/getProduct/4');
         expect(response.status).toEqual(200);
         expect(response.body).toEqual({
             id: 4,

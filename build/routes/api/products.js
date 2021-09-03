@@ -56,7 +56,6 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                     description: req.body.description,
                     url: req.body.url,
                 };
-                console.log(req.body);
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
@@ -157,13 +156,13 @@ var productsByCategory = function (req, res) { return __awaiter(void 0, void 0, 
     });
 }); };
 productRouter.post('/', authenticator_1.checkJwt, authenticator_1.checkPermissions('add:product'), function (req, res) {
-    console.log('inside post /api/products');
     create(req, res);
 });
-productRouter.get('/', function (req, res) {
+productRouter.get('/getProduct', function (req, res) {
+    console.log(req.rawHeaders);
     index(req, res);
 });
-productRouter.get('/:productId', function (req, res) {
+productRouter.get('/getProduct/:productId', function (req, res) {
     show(req, res);
 });
 productRouter.delete('/', authenticator_1.checkJwt, authenticator_1.checkPermissions('delete:product'), function (req, res) {

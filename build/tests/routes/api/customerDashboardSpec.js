@@ -121,7 +121,6 @@ describe('Testing dashboard route', function () {
                         .expect(200)];
                 case 1:
                     response = _a.sent();
-                    console.log(customerAuthToken);
                     expect(response.body.userId).toEqual('testUser2');
                     expect(response.body.orders.length).toEqual(2);
                     return [2 /*return*/];

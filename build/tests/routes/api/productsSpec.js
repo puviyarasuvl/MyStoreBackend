@@ -86,7 +86,6 @@ describe('Testing products route', function () {
                 case 1:
                     res = _a.sent();
                     adminAuthToken = res.data.access_token;
-                    console.log(adminAuthToken);
                     return [4 /*yield*/, request
                             .post('/api/products')
                             .type('form')
@@ -146,7 +145,7 @@ describe('Testing products route', function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/api/products')];
+                case 0: return [4 /*yield*/, request.get('/api/products/getProduct')];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toEqual(200);
@@ -184,7 +183,7 @@ describe('Testing products route', function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/api/products/4')];
+                case 0: return [4 /*yield*/, request.get('/api/products/getProduct/4')];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toEqual(200);

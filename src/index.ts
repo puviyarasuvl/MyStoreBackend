@@ -2,6 +2,7 @@ import express from 'express';
 import routes from './routes/index';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import helmet from 'helmet';
 
 dotenv.config();
 
@@ -12,8 +13,9 @@ if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_AUDIENCE) {
 const app = express();
 const port = 3000;
 
-// Enable cors for all origins and routes
-app.use(cors());
+app.use(helmet());
+app.use(cors({ origin: process.env.CLIENT_ORIGIN_URL }));
+app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 

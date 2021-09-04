@@ -46,10 +46,12 @@ const show = async (req: express.Request, res: express.Response) => {
 
 const deleteProduct = async (req: express.Request, res: express.Response) => {
     try {
-        const result = await productModel.delete(parseInt(req.body.productId));
+        const result = await productModel.delete(
+            parseInt(req.params.productId)
+        );
 
         if (result) {
-            res.send('Product deleted successfully');
+            res.sendStatus(204);
         }
     } catch (err) {
         res.status(400);
@@ -90,7 +92,7 @@ productRouter.get('/getProduct/:productId', (req, res) => {
 });
 
 productRouter.delete(
-    '/',
+    '/deleteProduct/:productId',
     checkJwt,
     checkPermissions('delete:product'),
     (req, res) => {

@@ -130,11 +130,8 @@ describe('Testing products route', () => {
 
     it('[delete] /api/products/ should allow admin to delete a product', async () => {
         const response = await request
-            .delete('/api/products')
+            .delete('/api/products/deleteProduct/4')
             .type('form')
-            .send({
-                productId: 4,
-            })
             .set('Authorization', `Bearer ${adminAuthToken}`)
             .expect(200);
         expect(response.text).toEqual('Product deleted successfully');
@@ -142,11 +139,8 @@ describe('Testing products route', () => {
 
     it('[delete] /api/products/ should not allow customer to delete a product', async () => {
         await request
-            .delete('/api/products')
+            .delete('/api/products/deleteProduct/3')
             .type('form')
-            .send({
-                productId: 3,
-            })
             .set('Authorization', `Bearer ${customerAuthToken}`)
             .expect(403);
     });

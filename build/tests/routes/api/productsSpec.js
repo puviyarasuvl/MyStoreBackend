@@ -204,11 +204,8 @@ describe('Testing products route', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, request
-                        .delete('/api/products')
+                        .delete('/api/products/deleteProduct/4')
                         .type('form')
-                        .send({
-                        productId: 4,
-                    })
                         .set('Authorization', "Bearer " + adminAuthToken)
                         .expect(200)];
                 case 1:
@@ -222,11 +219,8 @@ describe('Testing products route', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, request
-                        .delete('/api/products')
+                        .delete('/api/products/deleteProduct/3')
                         .type('form')
-                        .send({
-                        productId: 3,
-                    })
                         .set('Authorization', "Bearer " + customerAuthToken)
                         .expect(403)];
                 case 1:

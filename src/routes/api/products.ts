@@ -73,7 +73,7 @@ const productsByCategory = async (
 };
 
 productRouter.post(
-    '/',
+    '/addProduct',
     checkJwt,
     checkPermissions('add:product'),
     (req, res) => {
@@ -82,8 +82,6 @@ productRouter.post(
 );
 
 productRouter.get('/getProduct', (req, res) => {
-    console.log(req.rawHeaders);
-
     index(req, res);
 });
 

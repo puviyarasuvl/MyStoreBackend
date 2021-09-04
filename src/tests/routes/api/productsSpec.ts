@@ -10,7 +10,7 @@ let adminAuthToken: string;
 describe('Testing products route', () => {
     it('[post] /api/products should return 401 for request without token', async () => {
         const response = await request
-            .post('/api/products')
+            .post('/api/products/addProduct')
             .type('form')
             .send({
                 productName: 'Book',
@@ -39,7 +39,7 @@ describe('Testing products route', () => {
         adminAuthToken = res.data.access_token;
 
         const response = await request
-            .post('/api/products')
+            .post('/api/products/addProduct')
             .type('form')
             .send({
                 productName: 'Book',
@@ -70,7 +70,7 @@ describe('Testing products route', () => {
         customerAuthToken = res.data.access_token;
 
         await request
-            .post('/api/products')
+            .post('/api/products/addProduct')
             .type('form')
             .send({
                 productName: 'Book',

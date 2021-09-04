@@ -51,7 +51,7 @@ describe('Testing products route', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, request
-                        .post('/api/products')
+                        .post('/api/products/addProduct')
                         .type('form')
                         .send({
                         productName: 'Book',
@@ -87,7 +87,7 @@ describe('Testing products route', function () {
                     res = _a.sent();
                     adminAuthToken = res.data.access_token;
                     return [4 /*yield*/, request
-                            .post('/api/products')
+                            .post('/api/products/addProduct')
                             .type('form')
                             .send({
                             productName: 'Book',
@@ -124,7 +124,7 @@ describe('Testing products route', function () {
                     res = _a.sent();
                     customerAuthToken = res.data.access_token;
                     return [4 /*yield*/, request
-                            .post('/api/products')
+                            .post('/api/products/addProduct')
                             .type('form')
                             .send({
                             productName: 'Book',

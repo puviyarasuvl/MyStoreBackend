@@ -155,7 +155,7 @@ var productsByCategory = function (req, res) { return __awaiter(void 0, void 0, 
         }
     });
 }); };
-productRouter.post('/', authenticator_1.checkJwt, authenticator_1.checkPermissions('add:product'), function (req, res) {
+productRouter.post('/addProduct', authenticator_1.checkJwt, authenticator_1.checkPermissions('add:product'), function (req, res) {
     create(req, res);
 });
 productRouter.get('/getProduct', function (req, res) {

@@ -8,7 +8,9 @@ const customerDashboard = new CustomerDashboard();
 
 const currentOrder = async (req: express.Request, res: express.Response) => {
     try {
-        const result = await customerDashboard.currentOrder(req.body.userID);
+        const result = await customerDashboard.currentOrder(
+            req.query.userID as string
+        );
         res.send(result);
     } catch (err) {
         res.status(400);

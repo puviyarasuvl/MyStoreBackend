@@ -82,9 +82,8 @@ describe('Testing dashboard route', function () {
                 case 3:
                     _a.sent();
                     return [4 /*yield*/, request
-                            .get('/api/dashboard/cart')
-                            .type('form')
-                            .send({ userID: 'testUser3' })
+                            .get('/api/dashboard/cart/')
+                            .query({ userID: 'testUser3' })
                             .set('Authorization', "Bearer " + customerAuthToken)
                             .expect(200)];
                 case 4:
@@ -100,8 +99,7 @@ describe('Testing dashboard route', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, request
                         .get('/api/dashboard/cart')
-                        .type('form')
-                        .send({ userID: 'testUser3' })
+                        .query({ userID: 'testUser3' })
                         .expect(401)];
                 case 1:
                     _a.sent();

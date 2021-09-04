@@ -207,10 +207,9 @@ describe('Testing products route', function () {
                         .delete('/api/products/deleteProduct/4')
                         .type('form')
                         .set('Authorization', "Bearer " + adminAuthToken)
-                        .expect(200)];
+                        .expect(204)];
                 case 1:
                     response = _a.sent();
-                    expect(response.text).toEqual('Product deleted successfully');
                     return [2 /*return*/];
             }
         });

@@ -39,9 +39,8 @@ describe('Testing dashboard route', () => {
             .expect(200);
 
         const response = await request
-            .get('/api/dashboard/cart')
-            .type('form')
-            .send({ userID: 'testUser3' })
+            .get('/api/dashboard/cart/')
+            .query({ userID: 'testUser3' })
             .set('Authorization', `Bearer ${customerAuthToken}`)
             .expect(200);
 
@@ -52,8 +51,7 @@ describe('Testing dashboard route', () => {
     it('[get] /api/dashboard/cart should return 401 for unauthenticated requests', async () => {
         await request
             .get('/api/dashboard/cart')
-            .type('form')
-            .send({ userID: 'testUser3' })
+            .query({ userID: 'testUser3' })
             .expect(401);
     });
 

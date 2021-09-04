@@ -118,25 +118,20 @@ var deleteProduct = function (req, res) { return __awaiter(void 0, void 0, void 
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                console.log('Inside delete product', req.params.productId);
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
+                _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, productModel.delete(parseInt(req.params.productId))];
-            case 2:
+            case 1:
                 result = _a.sent();
-                console.log(result);
                 if (result) {
-                    console.log('Sending response');
-                    res.send('Product deleted successfully');
+                    res.sendStatus(204);
                 }
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 3];
+            case 2:
                 err_4 = _a.sent();
                 res.status(400);
                 res.send("Error : " + err_4);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

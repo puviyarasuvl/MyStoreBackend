@@ -133,8 +133,7 @@ describe('Testing products route', () => {
             .delete('/api/products/deleteProduct/4')
             .type('form')
             .set('Authorization', `Bearer ${adminAuthToken}`)
-            .expect(200);
-        expect(response.text).toEqual('Product deleted successfully');
+            .expect(204);
     });
 
     it('[delete] /api/products/ should not allow customer to delete a product', async () => {

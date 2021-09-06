@@ -20,7 +20,9 @@ const currentOrder = async (req: express.Request, res: express.Response) => {
 
 const completedOrders = async (req: express.Request, res: express.Response) => {
     try {
-        const result = await customerDashboard.completedOrders(req.body.userId);
+        const result = await customerDashboard.completedOrders(
+            req.query.userId as string
+        );
         res.send(result);
     } catch (err) {
         res.status(400);

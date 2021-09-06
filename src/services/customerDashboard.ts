@@ -90,8 +90,8 @@ export class CustomerDashboard {
 
         try {
             const sql =
-                'SELECT userId, orderId, status, productId, quantity, total, createdDate FROM orders INNER JOIN order_products on orders.id=order_products.orderid WHERE userId=$1 AND status!=$2';
-            const result = await conn.query(sql, [userId, 'Open']);
+                'SELECT userId, orderId, status, productId, quantity, total, createdDate FROM orders INNER JOIN order_products on orders.id=order_products.orderid WHERE userId=$1 AND status!=$2 ORDER BY orderId DESC';
+            const result = await conn.query(sql, [userId, 'open']);
 
             if (result.rows.length) {
                 let order: Order = {

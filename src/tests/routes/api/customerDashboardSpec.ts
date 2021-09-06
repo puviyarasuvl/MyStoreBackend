@@ -58,8 +58,7 @@ describe('Testing dashboard route', () => {
     it('[get] /api/dashboard/orders should return completed orders', async () => {
         const response = await request
             .get('/api/dashboard/orders')
-            .type('form')
-            .send({ userId: 'testUser2' })
+            .query({ userId: 'testUser2' })
             .set('Authorization', `Bearer ${customerAuthToken}`)
             .expect(200);
 

@@ -70,7 +70,7 @@ var completedOrders = function (req, res) { return __awaiter(void 0, void 0, voi
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, customerDashboard.completedOrders(req.body.userId)];
+                return [4 /*yield*/, customerDashboard.completedOrders(req.query.userId)];
             case 1:
                 result = _a.sent();
                 res.send(result);

@@ -60,7 +60,7 @@ describe('Testing orders route', () => {
 
     it('[patch] /api/orders should allow user to update the status', async () => {
         const response = await request
-            .patch('/api/orders')
+            .patch('/api/orders/updateStatus')
             .type('form')
             .send({ orderId: 2, status: 'placed' })
             .set('Authorization', `Bearer ${customerAuthToken}`)

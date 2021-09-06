@@ -23,16 +23,6 @@ const expectedCompletedOrders: CompletedOrderDetails = {
     userId: 'testUser2',
     orders: [
         {
-            orderId: 3,
-            orderStatus: 'placed',
-            total: 409.97,
-            createdDate: '7/12/2021, 11:15:56 PM',
-            products: [
-                { productId: 2, quantity: 1 },
-                { productId: 3, quantity: 2 },
-            ],
-        },
-        {
             orderId: 4,
             orderStatus: 'placed',
             total: 4099.7,
@@ -40,6 +30,16 @@ const expectedCompletedOrders: CompletedOrderDetails = {
             products: [
                 { productId: 2, quantity: 10 },
                 { productId: 3, quantity: 20 },
+            ],
+        },
+        {
+            orderId: 3,
+            orderStatus: 'placed',
+            total: 409.97,
+            createdDate: '7/12/2021, 11:15:56 PM',
+            products: [
+                { productId: 2, quantity: 1 },
+                { productId: 3, quantity: 2 },
             ],
         },
     ],

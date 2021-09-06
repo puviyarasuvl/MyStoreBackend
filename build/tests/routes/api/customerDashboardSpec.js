@@ -113,8 +113,7 @@ describe('Testing dashboard route', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, request
                         .get('/api/dashboard/orders')
-                        .type('form')
-                        .send({ userId: 'testUser2' })
+                        .query({ userId: 'testUser2' })
                         .set('Authorization', "Bearer " + customerAuthToken)
                         .expect(200)];
                 case 1:

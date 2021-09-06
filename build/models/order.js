@@ -217,6 +217,134 @@ var OrderModel = /** @class */ (function () {
             });
         });
     };
+    /* method : updateQuantity. Updates quantity for the given product
+       input params : Product id, quantity, user id
+       return : Promise<OrderProducts> */
+    OrderModel.prototype.updateQuantity = function (productId, quantity, userId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, orderId, qtyRes, res, price, total, err_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, database_1.default.connect()];
+                    case 1:
+                        conn = _a.sent();
+                        _a.label = 2;
+                    case 2:
+                        _a.trys.push([2, 11, , 12]);
+                        sql = 'SELECT * FROM orders WHERE userId=$1 AND status=$2';
+                        return [4 /*yield*/, conn.query(sql, [userId, 'open'])];
+                    case 3:
+                        result = _a.sent();
+                        if (!(result.rows.length && result.rows[0].status === 'open')) return [3 /*break*/, 9];
+                        orderId = result.rows[0].id;
+                        sql =
+                            'SELECT quantity FROM order_products WHERE orderid=$1 AND productid=$2';
+                        return [4 /*yield*/, conn.query(sql, [orderId, productId])];
+                    case 4:
+                        qtyRes = _a.sent();
+                        sql =
+                            'UPDATE order_products set quantity=$1 WHERE orderid=$2 AND productid=$3 RETURNING *';
+                        return [4 /*yield*/, conn.query(sql, [
+                                quantity,
+                                orderId,
+                                productId,
+                            ])];
+                    case 5:
+                        res = _a.sent();
+                        sql = 'SELECT price FROM products WHERE id=$1';
+                        return [4 /*yield*/, conn.query(sql, [productId])];
+                    case 6:
+                        result = _a.sent();
+                        price = result.rows[0].price * (quantity - qtyRes.rows[0].quantity);
+                        sql = 'SELECT total FROM orders WHERE id=$1';
+                        return [4 /*yield*/, conn.query(sql, [orderId])];
+                    case 7:
+                        result = _a.sent();
+                        total = result.rows[0].total + price;
+                        sql = 'UPDATE orders SET total=$1 WHERE id=$2';
+                        return [4 /*yield*/, conn.query(sql, [total, orderId])];
+                    case 8:
+                        result = _a.sent();
+                        conn.release();
+                        return [2 /*return*/, res.rows[0]];
+                    case 9:
+                        conn.release();
+                        console.log('Failed to get the cart details');
+                        throw new Error('Failed to get the cart details');
+                    case 10: return [3 /*break*/, 12];
+                    case 11:
+                        err_5 = _a.sent();
+                        // Incase of any error occured relese client before handling the exception
+                        conn.release();
+                        console.log('Failed to update the quantity', err_5);
+                        throw err_5;
+                    case 12: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /* method : removeProduct. Removes give product from cart
+       input params : Product id, user id
+       return : Promise<number> */
+    OrderModel.prototype.removeProduct = function (productId, userId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, orderId, qtyRes, res, price, total, err_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, database_1.default.connect()];
+                    case 1:
+                        conn = _a.sent();
+                        _a.label = 2;
+                    case 2:
+                        _a.trys.push([2, 11, , 12]);
+                        sql = 'SELECT * FROM orders WHERE userId=$1 AND status=$2';
+                        return [4 /*yield*/, conn.query(sql, [userId, 'open'])];
+                    case 3:
+                        result = _a.sent();
+                        if (!(result.rows.length && result.rows[0].status === 'open')) return [3 /*break*/, 9];
+                        orderId = result.rows[0].id;
+                        sql =
+                            'SELECT quantity FROM order_products WHERE orderid=$1 AND productid=$2';
+                        return [4 /*yield*/, conn.query(sql, [orderId, productId])];
+                    case 4:
+                        qtyRes = _a.sent();
+                        sql =
+                            'DELETE FROM order_products WHERE orderid=$1 AND productid=$2';
+                        return [4 /*yield*/, conn.query(sql, [orderId, productId])];
+                    case 5:
+                        res = _a.sent();
+                        sql = 'SELECT price FROM products WHERE id=$1';
+                        return [4 /*yield*/, conn.query(sql, [productId])];
+                    case 6:
+                        result = _a.sent();
+                        price = result.rows[0].price * qtyRes.rows[0].quantity;
+                        sql = 'SELECT total FROM orders WHERE id=$1';
+                        return [4 /*yield*/, conn.query(sql, [orderId])];
+                    case 7:
+                        result = _a.sent();
+                        total = result.rows[0].total - price;
+                        sql = 'UPDATE orders SET total=$1 WHERE id=$2';
+                        return [4 /*yield*/, conn.query(sql, [total, orderId])];
+                    case 8:
+                        result = _a.sent();
+                        conn.release();
+                        return [2 /*return*/, res.rows[0]];
+                    case 9:
+                        conn.release();
+                        console.log('Failed to get the cart details');
+                        throw new Error('Failed to get the cart details');
+                    case 10: return [3 /*break*/, 12];
+                    case 11:
+                        err_6 = _a.sent();
+                        // Incase of any error occured relese client before handling the exception
+                        conn.release();
+                        console.log('Failed to remove the product from cart', err_6);
+                        throw err_6;
+                    case 12: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return OrderModel;
 }());
 exports.OrderModel = OrderModel;

@@ -119,7 +119,7 @@ describe('Testing orders route', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, request
-                        .patch('/api/orders')
+                        .patch('/api/orders/updateStatus')
                         .type('form')
                         .send({ orderId: 2, status: 'placed' })
                         .set('Authorization', "Bearer " + customerAuthToken)

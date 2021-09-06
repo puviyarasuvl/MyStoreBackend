@@ -124,16 +124,62 @@ var addProduct = function (req, res) { return __awaiter(void 0, void 0, void 0, 
         }
     });
 }); };
+var updateQuantity = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var result, err_5;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, orderModel.updateQuantity(parseInt(req.body.productId), parseInt(req.body.quantity), req.body.userId)];
+            case 1:
+                result = _a.sent();
+                res.send(result);
+                return [3 /*break*/, 3];
+            case 2:
+                err_5 = _a.sent();
+                res.status(400);
+                res.send("Error : " + err_5);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+var removeProduct = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var result, err_6;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, orderModel.removeProduct(parseInt(req.params.productId), req.params.userId)];
+            case 1:
+                result = _a.sent();
+                res.send(result);
+                return [3 /*break*/, 3];
+            case 2:
+                err_6 = _a.sent();
+                res.status(400);
+                res.send("Error : " + err_6);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
 orderRouter.get('/', authenticator_1.checkJwt, function (req, res) {
     index(req, res);
 });
 orderRouter.get('/:orderId', authenticator_1.checkJwt, function (req, res) {
     show(req, res);
 });
-orderRouter.patch('/', authenticator_1.checkJwt, function (req, res) {
+orderRouter.patch('/updateStatus', authenticator_1.checkJwt, function (req, res) {
     updateStaus(req, res);
 });
 orderRouter.post('/addProduct', authenticator_1.checkJwt, function (req, res) {
     addProduct(req, res);
+});
+orderRouter.patch('/updateQty', authenticator_1.checkJwt, function (req, res) {
+    updateQuantity(req, res);
+});
+orderRouter.delete('/removeProduct/:productId/:userId', authenticator_1.checkJwt, function (req, res) {
+    removeProduct(req, res);
 });
 exports.default = orderRouter;

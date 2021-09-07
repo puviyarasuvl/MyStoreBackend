@@ -101,29 +101,67 @@ export class OrderModel {
             if (result.rows.length && result.rows[0].status === 'open') {
                 const orderId = result.rows[0].id;
 
+                // Check if the product is already added in the cart
                 sql =
-                    'INSERT INTO order_products (orderId, productId, quantity) VALUES ($1, $2, $3) RETURNING *';
-                const res = await conn.query(sql, [
-                    orderId,
-                    productId,
-                    quantity,
-                ]);
+                    'SELECT * FROM order_products WHERE orderId=$1 AND productId=$2';
+                result = await conn.query(sql, [orderId, productId]);
 
-                sql = 'SELECT price FROM products WHERE id=$1';
-                result = await conn.query(sql, [productId]);
+                if (
+                    result.rows.length &&
+                    result.rows[0].productid === productId
+                ) {
+                    const oldQuantity = result.rows[0].quantity;
+                    const newQuantity = oldQuantity + quantity;
 
-                const price = result.rows[0].price * quantity;
+                    sql =
+                        'UPDATE order_products SET quantity=$1 WHERE orderId=$2 AND productId=$3 RETURNING *';
+                    const res = await conn.query(sql, [
+                        newQuantity,
+                        orderId,
+                        productId,
+                    ]);
 
-                sql = 'SELECT total FROM orders WHERE id=$1';
-                result = await conn.query(sql, [orderId]);
+                    sql = 'SELECT price FROM products WHERE id=$1';
+                    result = await conn.query(sql, [productId]);
 
-                const total = result.rows[0].total + price;
+                    const price = result.rows[0].price * quantity;
 
-                sql = 'UPDATE orders SET total=$1 WHERE id=$2';
-                result = await conn.query(sql, [total, orderId]);
+                    sql = 'SELECT total FROM orders WHERE id=$1';
+                    result = await conn.query(sql, [orderId]);
 
-                conn.release();
-                return res.rows[0];
+                    const total = result.rows[0].total + price;
+
+                    sql = 'UPDATE orders SET total=$1 WHERE id=$2';
+                    result = await conn.query(sql, [total, orderId]);
+
+                    conn.release();
+
+                    return res.rows[0];
+                } else {
+                    sql =
+                        'INSERT INTO order_products (orderId, productId, quantity) VALUES ($1, $2, $3) RETURNING *';
+                    const res = await conn.query(sql, [
+                        orderId,
+                        productId,
+                        quantity,
+                    ]);
+
+                    sql = 'SELECT price FROM products WHERE id=$1';
+                    result = await conn.query(sql, [productId]);
+
+                    const price = result.rows[0].price * quantity;
+
+                    sql = 'SELECT total FROM orders WHERE id=$1';
+                    result = await conn.query(sql, [orderId]);
+
+                    const total = result.rows[0].total + price;
+
+                    sql = 'UPDATE orders SET total=$1 WHERE id=$2';
+                    result = await conn.query(sql, [total, orderId]);
+
+                    conn.release();
+                    return res.rows[0];
+                }
             } else {
                 const date = new Date().toLocaleString();
                 const status = 'open';
